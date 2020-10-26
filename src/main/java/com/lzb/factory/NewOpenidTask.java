@@ -78,11 +78,17 @@ public class NewOpenidTask implements Runnable {
                     JSONArray array = object.getJSONArray("result_list");
                     for (int i = 0; i < array.size(); i++) {
                         JSONObject vo = array.getJSONObject(i);
+                        counter.getTotalCount().incrementAndGet();
                         //这个地方应该是同序的
                         ExcelRowData data = list.get(index + i);
-                        if (vo.getString("ori_openid").equals(data.getChannelId())) {
+                        if ("ok".equals(vo.getString("err_msg")) && vo.getString("ori_openid").equals(data.getChannelId())) {
                             data.setNewOpenId(vo.getString("new_openid"));
                             counter.getSuccessCount().incrementAndGet();
+                        } else {
+                            //TODO 错误的openid
+                            //{"errcode":0,"errmsg":"ok","result_list":[{"ori_openid":"ovRu5s0vGuTlL5u2zpvJZtXfZL4411","err_msg":"ori_openid error"}]}
+                            System.out.println("错误的openid , data = " + data.forString());
+                            counter.getFailCount().incrementAndGet();
                         }
                     }
                 } else {
@@ -92,7 +98,7 @@ public class NewOpenidTask implements Runnable {
                         TokenUtil.getToken(config);
                     }
                     System.out.println("response = " + response);
-                    counter.getFailCount().incrementAndGet();
+                    counter.getExecutorFailCount().incrementAndGet();
                 }
 
             } catch (IOException e) {

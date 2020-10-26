@@ -39,7 +39,7 @@ public class HttpUtilTest {
     public void getNewOpenId() throws Exception {
 //        HttpUtil.getNewOpenId(config, config.getDataList().subList(11080, 11090), new HttpPost(),new AtomicInteger());
 //        for (ExcelRowData data : config.getDataList().subList(11080, 11090)) {
-//            System.out.println("data = " + data.forStringFor());
+//            System.out.println("data = " + data.forString());
 //        }
     }
 

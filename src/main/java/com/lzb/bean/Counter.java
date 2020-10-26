@@ -15,10 +15,15 @@ public class Counter {
 
     private AtomicInteger executorCount = new AtomicInteger();
 
+    private AtomicInteger executorFailCount = new AtomicInteger();
+
     private AtomicInteger successCount = new AtomicInteger();
 
     private AtomicInteger FileIoCount = new AtomicInteger();
 
+    private AtomicInteger ignoreWriterFile = new AtomicInteger();
+
+    private AtomicInteger saveFileCount = new AtomicInteger();
 
     public AtomicInteger getTotalCount() {
         return totalCount;
@@ -40,14 +45,29 @@ public class Counter {
         return FileIoCount;
     }
 
+    public AtomicInteger getExecutorFailCount() {
+        return executorFailCount;
+    }
+
+    public AtomicInteger getIgnoreWriterFile() {
+        return ignoreWriterFile;
+    }
+
+    public AtomicInteger getSaveFileCount() {
+        return saveFileCount;
+    }
+
     @Override
     public String toString() {
         return "Counter{" +
-                "totalCount=" + totalCount +
-                ", failCount=" + failCount +
-                ", executorCount=" + executorCount +
-                ", successCount=" + successCount +
-                ", FileIoCount=" + FileIoCount +
+                "总处理条数=" + totalCount +
+                ", 失败条数=" + failCount +
+                ", 调用接口次数=" + executorCount +
+                ", 调用接口失败次数=" + executorFailCount +
+                ", 成功条数=" + successCount +
+                ", IO次数=" + FileIoCount +
+                ", 忽略写文件条数=" + ignoreWriterFile +
+                ", 写文件条数=" + saveFileCount +
                 '}';
     }
 }

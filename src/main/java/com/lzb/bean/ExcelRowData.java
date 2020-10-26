@@ -66,7 +66,7 @@ public class ExcelRowData {
     }
 
 
-    public String forStringFor() {
+    public String forString() {
         return "ExcelRowData{" +
                 "id=" + id +
                 ", platformId=" + platformId +

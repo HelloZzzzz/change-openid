@@ -2,6 +2,7 @@ package com.lzb.utils;
 
 import com.lzb.bean.Counter;
 import com.lzb.bean.ExcelRowData;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -29,6 +30,10 @@ public class FileUtil {
         int rows = 0;
         int ioCount = 0;
         for (ExcelRowData data : list) {
+            if (StringUtils.isBlank(data.getNewOpenId())) {
+                counter.getIgnoreWriterFile().incrementAndGet();
+                continue;
+            }
             try {
                 StringBuilder stringBuilder = new StringBuilder();
                 stringBuilder.append("update `hc_user_center`.`t_uc_user` set channel_id = ");
@@ -41,7 +46,7 @@ public class FileUtil {
                 stringBuilder.append("\n");
                 bufferedWriter.append(stringBuilder.toString());
                 rows++;
-                counter.getTotalCount().incrementAndGet();
+                counter.getSaveFileCount().incrementAndGet();
                 if (4 * 1024 == rows) {
                     bufferedWriter.flush();
                     ioCount++;
