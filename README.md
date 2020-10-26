@@ -8,7 +8,9 @@
 
     @Test
     public void executor() throws Exception {
-        Executor executor = new ExecutorFactoryBuilder().builder(Resource.getInputStream("src/main/resources/change-openid.properties")).createExecutor();
+        Executor executor = new ExecutorFactoryBuilder()
+        .builder(Resource.getInputStream("src/main/resources/change-openid.properties"))
+        .createExecutor();
         executor.handler();
     }
 
